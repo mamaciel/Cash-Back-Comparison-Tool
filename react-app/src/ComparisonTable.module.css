@@ -1,0 +1,28 @@
+/* Apply column layout using flexbox */
+.container {
+    display: flex;
+  }
+  
+  .column {
+    flex-basis: 33%; /* Each column occupies 33% of the width */
+    padding: 0 10px;
+  }
+  
+  /* Adjust table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th,
+  td {
+    font-family: Lato;
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tr:last-child td {
+    border-bottom: none;
+  }
+  
