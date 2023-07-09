@@ -7,3 +7,9 @@ body {
   margin: 0;
   padding: 0;
 }
+
+h2 {
+  font-family: Lato;
+  padding-left: 1rem;
+  font-size: 1.3rem;
+}
