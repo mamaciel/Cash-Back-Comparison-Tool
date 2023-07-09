@@ -9,14 +9,9 @@ function App() {
   return (
     <>
       <Header />
-      <h2>Annual Fee</h2>
-      <AnnualFee />
-      {/* <ComparisonTable /> */}
-      <h2>Bonus Offer</h2>
-      <BonusOffer />
-      <h2>Cash Back</h2>
+      {/*<AnnualFee />*/}
+      <ComparisonTable />
     </>
   );
 }
-
 export default App;
