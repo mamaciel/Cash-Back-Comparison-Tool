@@ -1,5 +1,6 @@
 import styles from "./ComparisonTable.module.css";
 import CreditCardData from "./CreditCardData";
+//import * from "./assets/" as images;
 
 const ComparisonTable = () => {
   const cardNames = CreditCardData.map((card) => card.name);
@@ -8,6 +9,7 @@ const ComparisonTable = () => {
   const cashBack = CreditCardData.map((card) => card.cashBack);
   const pros = CreditCardData.map((card) => card.pros);
   const more = CreditCardData.map((card) => card.more);
+  const imageURLs = CreditCardData.map((card) => card.image);
 
   return (
     <>
@@ -17,6 +19,18 @@ const ComparisonTable = () => {
 
           <table className={styles.table}>
             <tbody>
+              <tr>
+                {imageURLs.map((URL, index) => (
+                  <td
+                    className={`${styles.column} ${
+                      index === 1 ? styles.borderTd : ""
+                    }`}
+                    key={index}
+                  >
+                    <img src={URL + ".png"} />
+                  </td>
+                ))}
+              </tr>
               <tr>
                 {cardNames.map((name, index) => (
                   <td
