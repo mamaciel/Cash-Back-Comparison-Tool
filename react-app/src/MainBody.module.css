@@ -40,6 +40,17 @@ img {
   height: auto;
 }
 
+p {
+  font-family: Lato;
+  padding-left: 16px;
+}
+label {
+  padding: 5px;
+}
+
+label[for="amount"] {
+  color: pink;
+}
 .tableContainer {
   margin: 0 auto; /* Center align the table */
   width: 50%;

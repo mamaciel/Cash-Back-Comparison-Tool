@@ -1,8 +1,13 @@
-import styles from "./ComparisonTable.module.css";
+import styles from "./MainBody.module.css";
 import CreditCardData from "./CreditCardData";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputAdornment from "@mui/material/InputAdornment";
+
 //import * from "./assets/" as images;
 
-const ComparisonTable = () => {
+const MainBody = () => {
   const cardNames = CreditCardData.map((card) => card.name);
   const annualFees = CreditCardData.map((card) => card.annualFee);
   const bonusOffers = CreditCardData.map((card) => card.bonusOffer);
@@ -15,6 +20,118 @@ const ComparisonTable = () => {
     <>
       <div className={styles.tableContainer}>
         <div className={styles.tableWrapper}>
+          <h2>Spending</h2>
+          <p>
+            Please enter your monthly average spending for each category. Your
+            estimated yearly cashback will be displayed at the bottom of the
+            page
+          </p>
+          <div className="spendingCategories">
+            <FormControl size="small" sx={{ m: 1, width: "140px" }}>
+              <InputLabel style={{ color: "black" }} htmlFor="groceries">
+                Groceries
+              </InputLabel>
+              <OutlinedInput
+                id="groceries"
+                name="groceries"
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                style={{ color: "black" }}
+                label="Amount"
+              />
+            </FormControl>
+
+            <FormControl size="small" sx={{ m: 1, width: "140px" }}>
+              <InputLabel style={{ color: "black" }} htmlFor="gas">
+                Gas
+              </InputLabel>
+              <OutlinedInput
+                id="gas"
+                name="gas"
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                style={{ color: "black" }}
+                label="Amount"
+              />
+            </FormControl>
+
+            <FormControl size="small" sx={{ m: 1, width: "140px" }}>
+              <InputLabel style={{ color: "black" }} htmlFor="onlineShopping">
+                Online Shopping
+              </InputLabel>
+              <OutlinedInput
+                id="onlineShopping"
+                name="onlineShopping"
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                style={{ color: "black" }}
+                label="Amount"
+              />
+            </FormControl>
+
+            <FormControl size="small" sx={{ m: 1, width: "140px" }}>
+              <InputLabel style={{ color: "black" }} htmlFor="dining">
+                Dining
+              </InputLabel>
+              <OutlinedInput
+                id="dining"
+                name="dining"
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                style={{ color: "black" }}
+                label="Amount"
+              />
+            </FormControl>
+
+            <FormControl size="small" sx={{ m: 1, width: "140px" }}>
+              <InputLabel style={{ color: "black" }} htmlFor="travel">
+                Travel
+              </InputLabel>
+              <OutlinedInput
+                id="travel"
+                name="travel"
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                style={{ color: "black" }}
+                label="Amount"
+              />
+            </FormControl>
+
+            <FormControl size="small" sx={{ m: 1, width: "140px" }}>
+              <InputLabel style={{ color: "black" }} htmlFor="drugStores">
+                Drug Stores
+              </InputLabel>
+              <OutlinedInput
+                id="drugStores"
+                name="drugStores"
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                style={{ color: "black" }}
+                label="Amount"
+              />
+            </FormControl>
+
+            <FormControl size="small" sx={{ m: 1, width: "140px" }}>
+              <InputLabel style={{ color: "black" }} htmlFor="homeImprovement">
+                Home Improvement
+              </InputLabel>
+              <OutlinedInput
+                id="homeImprovement"
+                name="homeImprovement"
+                startAdornment={
+                  <InputAdornment position="start">$</InputAdornment>
+                }
+                style={{ color: "black" }}
+                label="Amount"
+              />
+            </FormControl>
+          </div>
           <h2>Credit Card</h2>
 
           <table className={styles.table}>
@@ -146,4 +263,4 @@ const ComparisonTable = () => {
   );
 };
 
-export default ComparisonTable;
+export default MainBody;
