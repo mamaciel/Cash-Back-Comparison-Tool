@@ -51,9 +51,14 @@ label {
 label[for="amount"] {
   color: pink;
 }
+
 .tableContainer {
   margin: 0 auto; /* Center align the table */
   width: 50%;
+}
+.categoriesContainer {
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 1000px) {
