@@ -1,12 +1,15 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, ChangeEvent, ReactNode, useEffect } from "react";
 import styles from "./MainBody.module.css";
 import CreditCardData from "./CreditCardData";
 import {
-  FormControl,
-  InputLabel,
-  OutlinedInput,
   InputAdornment,
   TextField,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
 } from "@mui/material";
 
 //import * from "./assets/" as images;
@@ -20,73 +23,22 @@ const MainBody = () => {
   const more = CreditCardData.map((card) => card.more);
   const imageURLs = CreditCardData.map((card) => card.image);
 
-  const [groceries, setGroceries] = useState(2);
-  const [gas, setGas] = useState(0);
-  const [onlineShopping, setOnlineShopping] = useState(0);
-  const [dining, setDining] = useState(0);
-  const [travel, setTravel] = useState(0);
-  const [drugStores, setDrugStores] = useState(0);
-  const [homeImprovement, setHomeImprovement] = useState(0);
-
-  // Function to update the total value based on spending categories
-  const updateTotal = () => {
-    const total =
-      parseFloat(groceries.toString() || "0") +
-      parseFloat(gas.toString() || "0") +
-      parseFloat(onlineShopping.toString() || "0") +
-      parseFloat(dining.toString() || "0") +
-      parseFloat(travel.toString() || "0") +
-      parseFloat(drugStores.toString() || "0") +
-      parseFloat(homeImprovement.toString() || "0");
-    setTotalValue(total);
-  };
+  const [spendingInputs, setSpendingInputs] = useState({
+    groceries: 0,
+    gas: 0,
+    onlineShopping: 0,
+    dining: 0,
+    travel: 0,
+    drugStores: 0,
+    homeImprovement: 0,
+  });
 
   // State variable to store the total value
   const [totalValue, setTotalValue] = useState(0);
 
-  // Function to handle onChange event for each spending category input
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = event.target;
-    switch (id) {
-      case "groceries":
-        setGroceries(parseFloat(value));
-        break;
-      case "gas":
-        setGas(parseFloat(value));
-        break;
-      case "onlineShopping":
-        setOnlineShopping(parseFloat(value));
-        break;
-      case "dining":
-        setDining(parseFloat(value));
-        break;
-      case "travel":
-        setTravel(parseFloat(value));
-        break;
-      case "drugStores":
-        setDrugStores(parseFloat(value));
-        break;
-      case "homeImprovement":
-        setHomeImprovement(parseFloat(value));
-        break;
-      default:
-        break;
-    }
-    // Call the updateTotal function to recalculate the total value
-  };
-
-  useEffect(() => {
-    // Call the updateTotal function whenever any of the spending category state variables change
-    updateTotal();
-  }, [
-    groceries,
-    gas,
-    onlineShopping,
-    dining,
-    travel,
-    drugStores,
-    homeImprovement,
-  ]);
+  const [ccName1, setCCName1] = useState("");
+  const [ccName2, setCCName2] = useState("");
+  const [ccName3, setCCName3] = useState("");
 
   const textFieldStyles = {
     width: "140px",
@@ -99,145 +51,257 @@ const MainBody = () => {
     fontSize: "17px",
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(spendingInputs);
+    console.log("The value of dining is:" + spendingInputs.dining);
+  };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setSpendingInputs((prevSpendingInputs) => ({
+      ...prevSpendingInputs,
+      [id]: parseFloat(value), // Convert input string to a number (float)
+    }));
+  };
+
+  const ccNameChange = (e: SelectChangeEvent<string>) => {
+    if (e.target.name === "select1") {
+      setCCName1(e.target.value);
+    } else if (e.target.name === "select2") {
+      setCCName2(e.target.value);
+    } else {
+      setCCName3(e.target.value);
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log("This is " + ccName1);
+  // }, [ccName1]);
+
   return (
     <>
       <div className={styles.tableContainer}>
         <div className={styles.tableWrapper}>
           <h2>Spending</h2>
           <p>Please enter your monthly average spending for each category.</p>
-          <div className={styles.categoriesContainer}>
-            <div className={styles.spendingCategories}>
-              <TextField
-                id="groceries"
-                label="Groceries"
-                variant="outlined"
-                size="small"
-                placeholder="0"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: labelStyles,
-                }}
-                style={textFieldStyles}
-                onInput={handleInputChange} // Add onChange event to each input field
-              />
+          <form onSubmit={handleSubmit}>
+            <div className={styles.categoriesContainer}>
+              <div className={styles.spendingCategories}>
+                <TextField
+                  id="groceries"
+                  label="Groceries"
+                  variant="outlined"
+                  size="small"
+                  placeholder="0"
+                  type="number"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                  }}
+                  InputLabelProps={{
+                    style: labelStyles,
+                  }}
+                  style={textFieldStyles}
+                  onChange={handleInputChange}
+                />
 
-              <TextField
-                id="gas"
-                label="Gas"
-                variant="outlined"
-                size="small"
-                placeholder="0"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: labelStyles,
-                }}
-                style={textFieldStyles}
-                onChange={handleInputChange}
-              />
+                <TextField
+                  id="gas"
+                  label="Gas"
+                  variant="outlined"
+                  size="small"
+                  placeholder="0"
+                  type="number"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                  }}
+                  InputLabelProps={{
+                    style: labelStyles,
+                  }}
+                  style={textFieldStyles}
+                  onChange={handleInputChange}
+                />
 
-              <TextField
-                id="onlineShopping"
-                label="Online Shopping"
-                variant="outlined"
-                size="small"
-                placeholder="0"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: labelStyles,
-                }}
-                style={textFieldStyles}
-                onChange={handleInputChange}
-              />
+                <TextField
+                  id="onlineShopping"
+                  label="Online Shopping"
+                  variant="outlined"
+                  size="small"
+                  placeholder="0"
+                  type="number"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                  }}
+                  InputLabelProps={{
+                    style: labelStyles,
+                  }}
+                  style={textFieldStyles}
+                  onChange={handleInputChange}
+                />
 
-              <TextField
-                id="dining"
-                label="Dining"
-                variant="outlined"
-                size="small"
-                placeholder="0"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: labelStyles,
-                }}
-                style={textFieldStyles}
-                onChange={handleInputChange}
-              />
+                <TextField
+                  id="dining"
+                  label="Dining"
+                  variant="outlined"
+                  size="small"
+                  placeholder="0"
+                  type="number"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                  }}
+                  InputLabelProps={{
+                    style: labelStyles,
+                  }}
+                  style={textFieldStyles}
+                  onChange={handleInputChange}
+                />
 
-              <TextField
-                id="travel"
-                label="Travel"
-                variant="outlined"
-                size="small"
-                placeholder="0"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: labelStyles,
-                }}
-                style={textFieldStyles}
-                onChange={handleInputChange}
-              />
+                <TextField
+                  id="travel"
+                  label="Travel"
+                  variant="outlined"
+                  size="small"
+                  placeholder="0"
+                  type="number"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                  }}
+                  InputLabelProps={{
+                    style: labelStyles,
+                  }}
+                  style={textFieldStyles}
+                  onChange={handleInputChange}
+                />
 
-              <TextField
-                id="drugStores"
-                label="Drug Stores"
-                variant="outlined"
-                size="small"
-                placeholder="0"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: labelStyles,
-                }}
-                style={textFieldStyles}
-                onChange={handleInputChange}
-              />
+                <TextField
+                  id="drugStores"
+                  label="Drug Stores"
+                  variant="outlined"
+                  size="small"
+                  placeholder="0"
+                  type="number"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                  }}
+                  InputLabelProps={{
+                    style: labelStyles,
+                  }}
+                  style={textFieldStyles}
+                  onChange={handleInputChange}
+                />
 
-              <TextField
-                id="homeImprovement"
-                label="Home Improvement"
-                variant="outlined"
-                size="small"
-                placeholder="0"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">$</InputAdornment>
-                  ),
-                }}
-                InputLabelProps={{
-                  style: labelStyles,
-                }}
-                style={textFieldStyles}
-                onChange={handleInputChange}
-              />
+                <TextField
+                  id="homeImprovement"
+                  label="Home Improvement"
+                  variant="outlined"
+                  size="small"
+                  placeholder="0"
+                  type="number"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">$</InputAdornment>
+                    ),
+                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                  }}
+                  InputLabelProps={{
+                    style: labelStyles,
+                  }}
+                  style={textFieldStyles}
+                  onChange={handleInputChange}
+                />
+                <br />
+                <button className={styles.submitButton} type="submit">
+                  Calculate
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
 
           <p>Total Value: ${totalValue.toFixed(2)}</p>
           <h2>Credit Card</h2>
-
+          <div style={{ display: "flex", gap: "20px" }}>
+            <Box sx={{ minWidth: 100, maxWidth: 250 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Name</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={ccName1}
+                  label="Name"
+                  onChange={ccNameChange}
+                  name="select1"
+                >
+                  <MenuItem value={"boa"}>
+                    BofA Customized Cash Rewards
+                  </MenuItem>
+                  <MenuItem value={"Fargo"}>Wells Fargo Active Cash</MenuItem>
+                  <MenuItem value={"Blue Cash"}>
+                    American Express Blue Cash Preferred
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 100, maxWidth: 250 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label2">Name</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label2"
+                  id="demo-simple-select2"
+                  value={ccName2}
+                  label="Name"
+                  onChange={ccNameChange}
+                  name="select2"
+                >
+                  <MenuItem value={"boa"}>
+                    BofA Customized Cash Rewards
+                  </MenuItem>
+                  <MenuItem value={"Fargo"}>Wells Fargo Active Cash</MenuItem>
+                  <MenuItem value={"Blue Cash"}>
+                    American Express Blue Cash Preferred
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+            <Box sx={{ minWidth: 100, maxWidth: 250 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">Name</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={ccName3}
+                  label="Name"
+                  onChange={ccNameChange}
+                  name="select3"
+                >
+                  <MenuItem value={"boa"}>
+                    BofA Customized Cash Rewards
+                  </MenuItem>
+                  <MenuItem value={"Fargo"}>Wells Fargo Active Cash</MenuItem>
+                  <MenuItem value={"Blue Cash"}>
+                    American Express Blue Cash Preferred
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          </div>
           <table className={styles.table}>
             <tbody>
               <tr>

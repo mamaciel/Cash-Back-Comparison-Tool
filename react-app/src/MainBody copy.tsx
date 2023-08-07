@@ -1,13 +1,7 @@
-import React, { useState, ChangeEvent, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./MainBody.module.css";
 import CreditCardData from "./CreditCardData";
-import {
-  FormControl,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  TextField,
-} from "@mui/material";
+import { InputAdornment, TextField } from "@mui/material";
 
 //import * from "./assets/" as images;
 
@@ -20,7 +14,7 @@ const MainBody = () => {
   const more = CreditCardData.map((card) => card.more);
   const imageURLs = CreditCardData.map((card) => card.image);
 
-  const [groceries, setGroceries] = useState(2);
+  const [groceries, setGroceries] = useState(0);
   const [gas, setGas] = useState(0);
   const [onlineShopping, setOnlineShopping] = useState(0);
   const [dining, setDining] = useState(0);
@@ -113,10 +107,12 @@ const MainBody = () => {
                 variant="outlined"
                 size="small"
                 placeholder="0"
+                type="number"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputProps: { min: 0 },
                 }}
                 InputLabelProps={{
                   style: labelStyles,
@@ -131,10 +127,12 @@ const MainBody = () => {
                 variant="outlined"
                 size="small"
                 placeholder="0"
+                type="number"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputProps: { min: 0 },
                 }}
                 InputLabelProps={{
                   style: labelStyles,
@@ -149,10 +147,12 @@ const MainBody = () => {
                 variant="outlined"
                 size="small"
                 placeholder="0"
+                type="number"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputProps: { min: 0 },
                 }}
                 InputLabelProps={{
                   style: labelStyles,
@@ -167,10 +167,12 @@ const MainBody = () => {
                 variant="outlined"
                 size="small"
                 placeholder="0"
+                type="number"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputProps: { min: 0 },
                 }}
                 InputLabelProps={{
                   style: labelStyles,
@@ -185,10 +187,12 @@ const MainBody = () => {
                 variant="outlined"
                 size="small"
                 placeholder="0"
+                type="number"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputProps: { min: 0 },
                 }}
                 InputLabelProps={{
                   style: labelStyles,
@@ -203,10 +207,12 @@ const MainBody = () => {
                 variant="outlined"
                 size="small"
                 placeholder="0"
+                type="number"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputProps: { min: 0 },
                 }}
                 InputLabelProps={{
                   style: labelStyles,
@@ -221,10 +227,12 @@ const MainBody = () => {
                 variant="outlined"
                 size="small"
                 placeholder="0"
+                type="number"
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">$</InputAdornment>
                   ),
+                  inputProps: { min: 0 },
                 }}
                 InputLabelProps={{
                   style: labelStyles,
