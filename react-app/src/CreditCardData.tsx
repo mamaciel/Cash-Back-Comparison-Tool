@@ -31,6 +31,16 @@ const CreditCardData = [
       "$250 statement credit after you spend $3,000 in purchases within the first 6 months.",
     more: "Additional features",
   },
+  {
+    name: "Bank of America Unlimited Cash Rewards",
+    image: "src/assets/Bank-of-America-Unlimited-Cash-Rewards",
+    cashBack: "1.5% on all purchases",
+    annualFee: "$0",
+    pros: "No annual fee, simple cashback",
+    bonusOffer:
+      "$200 online cash rewards bonus after making at least $1,000 in purchases in the first 90 days of your account opening.",
+    more: "Additional features",
+  },
 ];
 
 export default CreditCardData;

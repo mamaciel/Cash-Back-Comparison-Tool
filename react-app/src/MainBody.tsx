@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, ReactNode, useEffect } from "react";
 import styles from "./MainBody.module.css";
 import CreditCardData from "./CreditCardData";
+import CreditCardSelectBox from "./CreditCardSelects";
 import {
   InputAdornment,
   TextField,
@@ -12,16 +13,36 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 
-//import * from "./assets/" as images;
+const textFieldStyles = {
+  width: "140px",
+  color: "black",
+  margin: "5px",
+};
+
+const labelStyles = {
+  color: "black",
+  fontSize: "17px",
+};
 
 const MainBody = () => {
-  const cardNames = CreditCardData.map((card) => card.name);
-  const annualFees = CreditCardData.map((card) => card.annualFee);
-  const bonusOffers = CreditCardData.map((card) => card.bonusOffer);
-  const cashBack = CreditCardData.map((card) => card.cashBack);
-  const pros = CreditCardData.map((card) => card.pros);
-  const more = CreditCardData.map((card) => card.more);
-  const imageURLs = CreditCardData.map((card) => card.image);
+  const [selectedCreditCards, setSelectedCreditCards] = useState([
+    "Bank of America Customized Cash Rewards",
+    "Wells Fargo Active Cash",
+    "American Express Blue Cash Preferred",
+  ]);
+
+  const selectedCardData = CreditCardData.filter((card) =>
+    selectedCreditCards.includes(card.name)
+  );
+
+  console.log(selectedCreditCards);
+  const cardNames = selectedCardData.map((card) => card.name);
+  const annualFees = selectedCardData.map((card) => card.annualFee);
+  const bonusOffers = selectedCardData.map((card) => card.bonusOffer);
+  const cashBack = selectedCardData.map((card) => card.cashBack);
+  const pros = selectedCardData.map((card) => card.pros);
+  const more = selectedCardData.map((card) => card.more);
+  const imageURLs = selectedCardData.map((card) => card.image);
 
   const [spendingInputs, setSpendingInputs] = useState({
     groceries: 0,
@@ -35,21 +56,6 @@ const MainBody = () => {
 
   // State variable to store the total value
   const [totalValue, setTotalValue] = useState(0);
-
-  const [ccName1, setCCName1] = useState("");
-  const [ccName2, setCCName2] = useState("");
-  const [ccName3, setCCName3] = useState("");
-
-  const textFieldStyles = {
-    width: "140px",
-    color: "black",
-    margin: "5px",
-  };
-
-  const labelStyles = {
-    color: "black",
-    fontSize: "17px",
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,13 +72,14 @@ const MainBody = () => {
   };
 
   const ccNameChange = (e: SelectChangeEvent<string>) => {
-    if (e.target.name === "select1") {
-      setCCName1(e.target.value);
-    } else if (e.target.name === "select2") {
-      setCCName2(e.target.value);
-    } else {
-      setCCName3(e.target.value);
-    }
+    const updatedIndex = parseInt(e.target.name.slice(-1)) - 1; // Extract the index from the name (select1 -> 0, select2 -> 1, select3 -> 2)
+    const updatedValue = e.target.value;
+
+    setSelectedCreditCards((prevSelectedCreditCards) => {
+      const newSelectedCreditCards = [...prevSelectedCreditCards];
+      newSelectedCreditCards[updatedIndex] = updatedValue;
+      return newSelectedCreditCards;
+    });
   };
 
   // useEffect(() => {
@@ -237,71 +244,26 @@ const MainBody = () => {
 
           <p>Total Value: ${totalValue.toFixed(2)}</p>
           <h2>Credit Card</h2>
-          <div style={{ display: "flex", gap: "20px" }}>
-            <Box sx={{ minWidth: 100, maxWidth: 250 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Name</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={ccName1}
-                  label="Name"
-                  onChange={ccNameChange}
-                  name="select1"
-                >
-                  <MenuItem value={"boa"}>
-                    BofA Customized Cash Rewards
-                  </MenuItem>
-                  <MenuItem value={"Fargo"}>Wells Fargo Active Cash</MenuItem>
-                  <MenuItem value={"Blue Cash"}>
-                    American Express Blue Cash Preferred
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={{ minWidth: 100, maxWidth: 250 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label2">Name</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label2"
-                  id="demo-simple-select2"
-                  value={ccName2}
-                  label="Name"
-                  onChange={ccNameChange}
-                  name="select2"
-                >
-                  <MenuItem value={"boa"}>
-                    BofA Customized Cash Rewards
-                  </MenuItem>
-                  <MenuItem value={"Fargo"}>Wells Fargo Active Cash</MenuItem>
-                  <MenuItem value={"Blue Cash"}>
-                    American Express Blue Cash Preferred
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
-            <Box sx={{ minWidth: 100, maxWidth: 250 }}>
-              <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Name</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={ccName3}
-                  label="Name"
-                  onChange={ccNameChange}
-                  name="select3"
-                >
-                  <MenuItem value={"boa"}>
-                    BofA Customized Cash Rewards
-                  </MenuItem>
-                  <MenuItem value={"Fargo"}>Wells Fargo Active Cash</MenuItem>
-                  <MenuItem value={"Blue Cash"}>
-                    American Express Blue Cash Preferred
-                  </MenuItem>
-                </Select>
-              </FormControl>
-            </Box>
+          <div
+            style={{ display: "flex", gap: "140px", justifyContent: "center" }}
+          >
+            <CreditCardSelectBox
+              value={selectedCreditCards[0]}
+              onChange={ccNameChange}
+              name="select1"
+            />
+            <CreditCardSelectBox
+              value={selectedCreditCards[1]}
+              onChange={ccNameChange}
+              name="select2"
+            />
+            <CreditCardSelectBox
+              value={selectedCreditCards[2]}
+              onChange={ccNameChange}
+              name="select3"
+            />
           </div>
+
           <table className={styles.table}>
             <tbody>
               <tr>
