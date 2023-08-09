@@ -31,11 +31,15 @@ const MainBody = () => {
     "American Express Blue Cash Preferred",
   ]);
 
+  console.log("this is 0" + selectedCreditCards[0]);
+  console.log("this is 1" + selectedCreditCards[1]);
+  console.log("this is 2" + selectedCreditCards[2]);
+
   const selectedCardData = CreditCardData.filter((card) =>
     selectedCreditCards.includes(card.name)
   );
 
-  console.log(selectedCreditCards);
+  //console.log(selectedCreditCards);
   const cardNames = selectedCardData.map((card) => card.name);
   const annualFees = selectedCardData.map((card) => card.annualFee);
   const bonusOffers = selectedCardData.map((card) => card.bonusOffer);
@@ -43,6 +47,7 @@ const MainBody = () => {
   const pros = selectedCardData.map((card) => card.pros);
   const more = selectedCardData.map((card) => card.more);
   const imageURLs = selectedCardData.map((card) => card.image);
+  //console.log("These are the" + cardNames[0], cardNames[1], cardNames[2]);
 
   const [spendingInputs, setSpendingInputs] = useState({
     groceries: 0,
@@ -74,17 +79,20 @@ const MainBody = () => {
   const ccNameChange = (e: SelectChangeEvent<string>) => {
     const updatedIndex = parseInt(e.target.name.slice(-1)) - 1; // Extract the index from the name (select1 -> 0, select2 -> 1, select3 -> 2)
     const updatedValue = e.target.value;
+    console.log(updatedIndex, updatedValue);
 
     setSelectedCreditCards((prevSelectedCreditCards) => {
       const newSelectedCreditCards = [...prevSelectedCreditCards];
       newSelectedCreditCards[updatedIndex] = updatedValue;
+      console.log("This is the new array: " + newSelectedCreditCards);
       return newSelectedCreditCards;
     });
   };
 
-  // useEffect(() => {
-  //   console.log("This is " + ccName1);
-  // }, [ccName1]);
+  const creditCardDataDict = {};
+  selectedCardData.forEach((card) => {
+    creditCardDataDict[card.name] = card;
+  });
 
   return (
     <>
@@ -267,14 +275,16 @@ const MainBody = () => {
           <table className={styles.table}>
             <tbody>
               <tr>
-                {imageURLs.map((URL, index) => (
+                {selectedCreditCards.map((cardName, index) => (
                   <td
                     className={`${styles.column} ${
                       index === 1 ? styles.borderTd : ""
                     }`}
                     key={index}
                   >
-                    <img src={URL + ".png"} />
+                    <img
+                      src={creditCardDataDict[cardName].annualFee + ".png"}
+                    />
                   </td>
                 ))}
               </tr>
