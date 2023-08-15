@@ -5,11 +5,6 @@ import CreditCardSelectBox from "./CreditCardSelects";
 import {
   InputAdornment,
   TextField,
-  Box,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
 
@@ -88,11 +83,6 @@ const MainBody = () => {
       return newSelectedCreditCards;
     });
   };
-
-  const creditCardDataDict = {};
-  selectedCardData.forEach((card) => {
-    creditCardDataDict[card.name] = card;
-  });
 
   return (
     <>
@@ -275,16 +265,14 @@ const MainBody = () => {
           <table className={styles.table}>
             <tbody>
               <tr>
-                {selectedCreditCards.map((cardName, index) => (
+                {imageURLs.map((URL, index) => (
                   <td
                     className={`${styles.column} ${
                       index === 1 ? styles.borderTd : ""
                     }`}
                     key={index}
                   >
-                    <img
-                      src={creditCardDataDict[cardName].annualFee + ".png"}
-                    />
+                    <img src={URL + ".png"} />
                   </td>
                 ))}
               </tr>

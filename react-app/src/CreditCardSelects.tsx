@@ -20,7 +20,7 @@ const CreditCardSelectBox: React.FC<CreditCardSelectsProps> = ({
   name,
 }) => {
   return (
-    <Box sx={{ minWidth: 100, maxWidth: 250 }}>
+    <Box sx={{ minWidth: 230, maxWidth: 250 }}>
       <FormControl fullWidth>
         <InputLabel id={`demo-simple-select-label-${name}`}>Name</InputLabel>
         <Select
