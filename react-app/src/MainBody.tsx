@@ -1,12 +1,8 @@
-import React, { useState, ChangeEvent, ReactNode, useEffect } from "react";
+import React, { useState, ChangeEvent } from "react";
 import styles from "./MainBody.module.css";
 import CreditCardData from "./CreditCardData";
 import CreditCardSelectBox from "./CreditCardSelects";
-import {
-  InputAdornment,
-  TextField,
-  SelectChangeEvent,
-} from "@mui/material";
+import { InputAdornment, TextField, SelectChangeEvent } from "@mui/material";
 
 const textFieldStyles = {
   width: "140px",
@@ -20,20 +16,33 @@ const labelStyles = {
 };
 
 const MainBody = () => {
+  interface CreditCard {
+    name: string;
+    image: string;
+    cashBack: string;
+    annualFee: string;
+    pros: string;
+    bonusOffer: string;
+    more: string;
+  }
+
   const [selectedCreditCards, setSelectedCreditCards] = useState([
     "Bank of America Customized Cash Rewards",
     "Wells Fargo Active Cash",
     "American Express Blue Cash Preferred",
   ]);
 
-  console.log("this is 0" + selectedCreditCards[0]);
-  console.log("this is 1" + selectedCreditCards[1]);
-  console.log("this is 2" + selectedCreditCards[2]);
+  // Create a mapping object for card data
+  const cardDataMap: { [key: string]: CreditCard } = {};
+  CreditCardData.forEach((card) => {
+    cardDataMap[card.name] = card;
+  });
 
-  const selectedCardData = CreditCardData.filter((card) =>
-    selectedCreditCards.includes(card.name)
+  // Filter card data based on selectedCreditCards
+  const selectedCardData = selectedCreditCards.map(
+    (cardName) => cardDataMap[cardName]
   );
-
+  console.log(cardDataMap);
   //console.log(selectedCreditCards);
   const cardNames = selectedCardData.map((card) => card.name);
   const annualFees = selectedCardData.map((card) => card.annualFee);
