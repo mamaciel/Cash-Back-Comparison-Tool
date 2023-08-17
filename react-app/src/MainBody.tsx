@@ -238,37 +238,41 @@ const MainBody = () => {
                   style={textFieldStyles}
                   onChange={handleInputChange}
                 />
-                <br />
-                <button className={styles.submitButton} type="submit">
-                  Calculate
-                </button>
               </div>
+            </div>
+
+            <div className={styles.submitButtonContainer}>
+              <button className={styles.submitButton} type="submit">
+                Calculate
+              </button>
             </div>
           </form>
 
           <p>Total Value: ${totalValue.toFixed(2)}</p>
           <h2>Credit Card</h2>
 
-          <table>
-            <tr>
-              <div className={styles.selectionRow}>
-                <CreditCardSelectBox
-                  value={selectedCreditCards[0]}
-                  onChange={ccNameChange}
-                  name="select1"
-                />
-                <CreditCardSelectBox
-                  value={selectedCreditCards[1]}
-                  onChange={ccNameChange}
-                  name="select2"
-                />
-                <CreditCardSelectBox
-                  value={selectedCreditCards[2]}
-                  onChange={ccNameChange}
-                  name="select3"
-                />
-              </div>
-            </tr>
+          <table className={styles.table}>
+            <tbody>
+              <tr>
+                <td className={styles.selectionRow}>
+                  <CreditCardSelectBox
+                    value={selectedCreditCards[0]}
+                    onChange={ccNameChange}
+                    name="select1"
+                  />
+                  <CreditCardSelectBox
+                    value={selectedCreditCards[1]}
+                    onChange={ccNameChange}
+                    name="select2"
+                  />
+                  <CreditCardSelectBox
+                    value={selectedCreditCards[2]}
+                    onChange={ccNameChange}
+                    name="select3"
+                  />
+                </td>
+              </tr>
+            </tbody>
           </table>
 
           <table className={styles.table}>

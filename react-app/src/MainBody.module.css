@@ -69,7 +69,27 @@ label[for="amount"] {
   width: 100%;
   display: flex;
   justify-content: center;
-  gap: 8%;
+  gap: 8.5%;
+  padding: 10px 0px;
+}
+
+.submitButton {
+  font-family: Lato;
+  color: white;
+  border: none;
+  background: green;
+  width: 140px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.submitButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 @media (max-width: 1000px) {
