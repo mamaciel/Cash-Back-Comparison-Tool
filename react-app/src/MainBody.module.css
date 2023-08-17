@@ -84,6 +84,10 @@ label[for="amount"] {
   border-radius: 20px;
   cursor: pointer;
 }
+.submitButton:hover {
+  background: rgb(0, 110, 0);
+  box-shadow: 5px 5px 5px #eee;
+}
 
 .submitButtonContainer {
   display: flex;

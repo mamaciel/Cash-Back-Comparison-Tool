@@ -3,6 +3,7 @@ import styles from "./MainBody.module.css";
 import CreditCardData from "./CreditCardData";
 import CreditCardSelectBox from "./CreditCardSelects";
 import { InputAdornment, TextField, SelectChangeEvent } from "@mui/material";
+import * as outsideFunctions from "./CreditCardCalculations";
 
 const textFieldStyles = {
   width: "140px",
@@ -26,6 +27,7 @@ const MainBody = () => {
     more: string;
   }
 
+  // Tracks which credit cards were selected in the dropdown selections
   const [selectedCreditCards, setSelectedCreditCards] = useState([
     "Bank of America Customized Cash Rewards",
     "Wells Fargo Active Cash",
@@ -52,22 +54,31 @@ const MainBody = () => {
   const imageURLs = selectedCardData.map((card) => card.image);
 
   const [spendingInputs, setSpendingInputs] = useState({
-    groceries: 0,
-    gas: 0,
-    onlineShopping: 0,
-    dining: 0,
-    travel: 0,
-    drugStores: 0,
-    homeImprovement: 0,
+    groceries: 400.0,
+    gas: 100.0,
+    onlineShopping: 60.0,
+    dining: 300.0,
+    travel: 40.0,
+    drugStores: 20.0,
+    homeImprovement: 40.0,
   });
 
   // State variable to store the total value
-  const [totalValue, setTotalValue] = useState(0);
+  const [totalValue1, setTotalValue1] = useState(0);
+  const [totalValue2, setTotalValue2] = useState(0);
+  const [totalValue3, setTotalValue3] = useState(0);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(spendingInputs);
     console.log("The value of dining is:" + spendingInputs.dining);
+    const results = outsideFunctions.Calculator(
+      spendingInputs,
+      selectedCreditCards
+    );
+    setTotalValue1(results[0]);
+    setTotalValue2(results[1]);
+    setTotalValue3(results[2]);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +92,9 @@ const MainBody = () => {
   const ccNameChange = (e: SelectChangeEvent<string>) => {
     const updatedIndex = parseInt(e.target.name.slice(-1)) - 1; // Extract the index from the name (select1 -> 0, select2 -> 1, select3 -> 2)
     const updatedValue = e.target.value;
+    setTotalValue1(0);
+    setTotalValue2(0);
+    setTotalValue3(0);
 
     setSelectedCreditCards((prevSelectedCreditCards) => {
       const newSelectedCreditCards = [...prevSelectedCreditCards];
@@ -105,6 +119,7 @@ const MainBody = () => {
                   variant="outlined"
                   size="small"
                   placeholder="0"
+                  value={400}
                   type="number"
                   InputProps={{
                     startAdornment: (
@@ -125,6 +140,7 @@ const MainBody = () => {
                   variant="outlined"
                   size="small"
                   placeholder="0"
+                  value={100}
                   type="number"
                   InputProps={{
                     startAdornment: (
@@ -145,6 +161,7 @@ const MainBody = () => {
                   variant="outlined"
                   size="small"
                   placeholder="0"
+                  value={60}
                   type="number"
                   InputProps={{
                     startAdornment: (
@@ -165,6 +182,7 @@ const MainBody = () => {
                   variant="outlined"
                   size="small"
                   placeholder="0"
+                  value={300}
                   type="number"
                   InputProps={{
                     startAdornment: (
@@ -185,6 +203,7 @@ const MainBody = () => {
                   variant="outlined"
                   size="small"
                   placeholder="0"
+                  value={40}
                   type="number"
                   InputProps={{
                     startAdornment: (
@@ -205,6 +224,7 @@ const MainBody = () => {
                   variant="outlined"
                   size="small"
                   placeholder="0"
+                  value={20}
                   type="number"
                   InputProps={{
                     startAdornment: (
@@ -225,6 +245,7 @@ const MainBody = () => {
                   variant="outlined"
                   size="small"
                   placeholder="0"
+                  value={40}
                   type="number"
                   InputProps={{
                     startAdornment: (
@@ -248,7 +269,16 @@ const MainBody = () => {
             </div>
           </form>
 
-          <p>Total Value: ${totalValue.toFixed(2)}</p>
+          <table>
+            <tbody>
+              <tr>
+                <td>Yearly Cash Back: ${totalValue1.toFixed(2)}</td>
+                <td>Yearly Cash Back: ${totalValue2.toFixed(2)}</td>
+                <td>Yearly Cash Back: ${totalValue3.toFixed(2)}</td>
+              </tr>
+            </tbody>
+          </table>
+
           <h2>Credit Card</h2>
 
           <table className={styles.table}>
