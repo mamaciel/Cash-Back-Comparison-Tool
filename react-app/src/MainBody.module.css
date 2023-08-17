@@ -61,6 +61,17 @@ label[for="amount"] {
   justify-content: center;
 }
 
+.tableWrapper {
+  width: 100%;
+}
+
+.selectionRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 8%;
+}
+
 @media (max-width: 1000px) {
   .tableContainer {
     width: 80%;

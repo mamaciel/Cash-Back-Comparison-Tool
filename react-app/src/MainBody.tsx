@@ -42,8 +42,7 @@ const MainBody = () => {
   const selectedCardData = selectedCreditCards.map(
     (cardName) => cardDataMap[cardName]
   );
-  console.log(cardDataMap);
-  //console.log(selectedCreditCards);
+
   const cardNames = selectedCardData.map((card) => card.name);
   const annualFees = selectedCardData.map((card) => card.annualFee);
   const bonusOffers = selectedCardData.map((card) => card.bonusOffer);
@@ -51,7 +50,6 @@ const MainBody = () => {
   const pros = selectedCardData.map((card) => card.pros);
   const more = selectedCardData.map((card) => card.more);
   const imageURLs = selectedCardData.map((card) => card.image);
-  //console.log("These are the" + cardNames[0], cardNames[1], cardNames[2]);
 
   const [spendingInputs, setSpendingInputs] = useState({
     groceries: 0,
@@ -83,12 +81,10 @@ const MainBody = () => {
   const ccNameChange = (e: SelectChangeEvent<string>) => {
     const updatedIndex = parseInt(e.target.name.slice(-1)) - 1; // Extract the index from the name (select1 -> 0, select2 -> 1, select3 -> 2)
     const updatedValue = e.target.value;
-    console.log(updatedIndex, updatedValue);
 
     setSelectedCreditCards((prevSelectedCreditCards) => {
       const newSelectedCreditCards = [...prevSelectedCreditCards];
       newSelectedCreditCards[updatedIndex] = updatedValue;
-      console.log("This is the new array: " + newSelectedCreditCards);
       return newSelectedCreditCards;
     });
   };
@@ -99,6 +95,7 @@ const MainBody = () => {
         <div className={styles.tableWrapper}>
           <h2>Spending</h2>
           <p>Please enter your monthly average spending for each category.</p>
+
           <form onSubmit={handleSubmit}>
             <div className={styles.categoriesContainer}>
               <div className={styles.spendingCategories}>
@@ -251,25 +248,28 @@ const MainBody = () => {
 
           <p>Total Value: ${totalValue.toFixed(2)}</p>
           <h2>Credit Card</h2>
-          <div
-            style={{ display: "flex", gap: "140px", justifyContent: "center" }}
-          >
-            <CreditCardSelectBox
-              value={selectedCreditCards[0]}
-              onChange={ccNameChange}
-              name="select1"
-            />
-            <CreditCardSelectBox
-              value={selectedCreditCards[1]}
-              onChange={ccNameChange}
-              name="select2"
-            />
-            <CreditCardSelectBox
-              value={selectedCreditCards[2]}
-              onChange={ccNameChange}
-              name="select3"
-            />
-          </div>
+
+          <table>
+            <tr>
+              <div className={styles.selectionRow}>
+                <CreditCardSelectBox
+                  value={selectedCreditCards[0]}
+                  onChange={ccNameChange}
+                  name="select1"
+                />
+                <CreditCardSelectBox
+                  value={selectedCreditCards[1]}
+                  onChange={ccNameChange}
+                  name="select2"
+                />
+                <CreditCardSelectBox
+                  value={selectedCreditCards[2]}
+                  onChange={ccNameChange}
+                  name="select3"
+                />
+              </div>
+            </tr>
+          </table>
 
           <table className={styles.table}>
             <tbody>
