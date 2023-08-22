@@ -14,8 +14,8 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   text-align: center;
   table-layout: fixed;
 }
@@ -23,11 +23,10 @@ table {
 td {
   font-family: Lato;
   padding: 15px;
-  text-align: left;
-  width: 33%;
-  text-align: center;
-  overflow: hidden;
+  overflow: auto;
   font-size: 1.1rem;
+  text-align: center;
+  width: 33%;
 }
 
 .borderTd {
@@ -42,23 +41,20 @@ img {
 
 p {
   font-family: Lato;
-  padding-left: 16px;
-}
-label {
-  padding: 5px;
-}
-
-label[for="amount"] {
-  color: pink;
+  padding-left: 1rem;
 }
 
 .tableContainer {
   margin: 0 auto; /* Center align the table */
-  width: 50%;
+  width: 60%;
 }
-.categoriesContainer {
+
+.spendingCategories {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly; /* Distribute items evenly along the main axis */
+  flex-wrap: wrap; /* Allow items to wrap to the next line */
+  gap: 2px;
 }
 
 .tableWrapper {
@@ -73,6 +69,13 @@ label[for="amount"] {
   padding: 10px 0px;
 }
 
+.submitButtonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .submitButton {
   font-family: Lato;
   color: white;
@@ -84,21 +87,41 @@ label[for="amount"] {
   border-radius: 20px;
   cursor: pointer;
 }
+
 .submitButton:hover {
   background: rgb(0, 110, 0);
   box-shadow: 5px 5px 5px #eee;
 }
 
-.submitButtonContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
+.bulletPoint {
+  margin-bottom: 1rem;
+}
+
+.pageContainer {
+  padding-bottom: 20px;
+}
+
+.cellContent ul {
+  padding-left: 2rem;
+}
+
+.cellContent ul li {
+  position: relative;
+  left: -10px;
+  text-align: left;
 }
 
 @media (max-width: 1000px) {
   .tableContainer {
-    width: 80%;
+    width: 100%;
+  }
+  td {
+    font-size: 1rem;
+    padding: 5px;
+  }
+
+  p {
+    text-align: center;
   }
 }
 

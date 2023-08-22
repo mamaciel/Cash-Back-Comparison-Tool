@@ -13,7 +13,6 @@ const textFieldStyles = {
 
 const labelStyles = {
   color: "black",
-  fontSize: "17px",
 };
 
 const MainBody = () => {
@@ -22,7 +21,8 @@ const MainBody = () => {
     image: string;
     cashBack: string;
     annualFee: string;
-    pros: string;
+    pros: string[];
+    cons: string[];
     bonusOffer: string;
     more: string;
   }
@@ -50,11 +50,12 @@ const MainBody = () => {
   const bonusOffers = selectedCardData.map((card) => card.bonusOffer);
   const cashBack = selectedCardData.map((card) => card.cashBack);
   const pros = selectedCardData.map((card) => card.pros);
+  const cons = selectedCardData.map((card) => card.cons);
   const more = selectedCardData.map((card) => card.more);
   const imageURLs = selectedCardData.map((card) => card.image);
 
   const [spendingInputs, setSpendingInputs] = useState({
-    groceries: 400.0,
+    groceries: 800.0,
     gas: 100.0,
     onlineShopping: 60.0,
     dining: 300.0,
@@ -105,329 +106,368 @@ const MainBody = () => {
 
   return (
     <>
-      <div className={styles.tableContainer}>
-        <div className={styles.tableWrapper}>
-          <h2>Spending</h2>
-          <p>Please enter your monthly average spending for each category.</p>
+      <div className={styles.pageContainer}>
+        <div className={styles.tableContainer}>
+          <div className={styles.tableWrapper}>
+            <h2>Spending</h2>
+            <p>Please enter your monthly average spending for each category.</p>
 
-          <form onSubmit={handleSubmit}>
-            <div className={styles.categoriesContainer}>
-              <div className={styles.spendingCategories}>
-                <TextField
-                  id="groceries"
-                  label="Groceries"
-                  variant="outlined"
-                  size="small"
-                  placeholder="0"
-                  value={400}
-                  type="number"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
-                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                  }}
-                  InputLabelProps={{
-                    style: labelStyles,
-                  }}
-                  style={textFieldStyles}
-                  onChange={handleInputChange}
-                />
+            <form onSubmit={handleSubmit}>
+              <div className={styles.categoriesContainer}>
+                <div className={styles.spendingCategories}>
+                  <TextField
+                    id="groceries"
+                    label="Groceries"
+                    variant="outlined"
+                    size="small"
+                    placeholder="0"
+                    value={800}
+                    type="number"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                    }}
+                    InputLabelProps={{
+                      style: labelStyles,
+                    }}
+                    style={textFieldStyles}
+                    onChange={handleInputChange}
+                  />
 
-                <TextField
-                  id="gas"
-                  label="Gas"
-                  variant="outlined"
-                  size="small"
-                  placeholder="0"
-                  value={100}
-                  type="number"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
-                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                  }}
-                  InputLabelProps={{
-                    style: labelStyles,
-                  }}
-                  style={textFieldStyles}
-                  onChange={handleInputChange}
-                />
+                  <TextField
+                    id="gas"
+                    label="Gas"
+                    variant="outlined"
+                    size="small"
+                    placeholder="0"
+                    value={100}
+                    type="number"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                    }}
+                    InputLabelProps={{
+                      style: labelStyles,
+                    }}
+                    style={textFieldStyles}
+                    onChange={handleInputChange}
+                  />
 
-                <TextField
-                  id="onlineShopping"
-                  label="Online Shopping"
-                  variant="outlined"
-                  size="small"
-                  placeholder="0"
-                  value={60}
-                  type="number"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
-                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                  }}
-                  InputLabelProps={{
-                    style: labelStyles,
-                  }}
-                  style={textFieldStyles}
-                  onChange={handleInputChange}
-                />
+                  <TextField
+                    id="onlineShopping"
+                    label="Online Shopping"
+                    variant="outlined"
+                    size="small"
+                    placeholder="0"
+                    value={60}
+                    type="number"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                    }}
+                    InputLabelProps={{
+                      style: labelStyles,
+                    }}
+                    style={textFieldStyles}
+                    onChange={handleInputChange}
+                  />
 
-                <TextField
-                  id="dining"
-                  label="Dining"
-                  variant="outlined"
-                  size="small"
-                  placeholder="0"
-                  value={300}
-                  type="number"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
-                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                  }}
-                  InputLabelProps={{
-                    style: labelStyles,
-                  }}
-                  style={textFieldStyles}
-                  onChange={handleInputChange}
-                />
+                  <TextField
+                    id="dining"
+                    label="Dining"
+                    variant="outlined"
+                    size="small"
+                    placeholder="0"
+                    value={300}
+                    type="number"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                    }}
+                    InputLabelProps={{
+                      style: labelStyles,
+                    }}
+                    style={textFieldStyles}
+                    onChange={handleInputChange}
+                  />
 
-                <TextField
-                  id="travel"
-                  label="Travel"
-                  variant="outlined"
-                  size="small"
-                  placeholder="0"
-                  value={40}
-                  type="number"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
-                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                  }}
-                  InputLabelProps={{
-                    style: labelStyles,
-                  }}
-                  style={textFieldStyles}
-                  onChange={handleInputChange}
-                />
+                  <TextField
+                    id="travel"
+                    label="Travel"
+                    variant="outlined"
+                    size="small"
+                    placeholder="0"
+                    value={40}
+                    type="number"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                    }}
+                    InputLabelProps={{
+                      style: labelStyles,
+                    }}
+                    style={textFieldStyles}
+                    onChange={handleInputChange}
+                  />
 
-                <TextField
-                  id="drugStores"
-                  label="Drug Stores"
-                  variant="outlined"
-                  size="small"
-                  placeholder="0"
-                  value={20}
-                  type="number"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
-                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                  }}
-                  InputLabelProps={{
-                    style: labelStyles,
-                  }}
-                  style={textFieldStyles}
-                  onChange={handleInputChange}
-                />
+                  <TextField
+                    id="drugStores"
+                    label="Drug Stores"
+                    variant="outlined"
+                    size="small"
+                    placeholder="0"
+                    value={20}
+                    type="number"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                    }}
+                    InputLabelProps={{
+                      style: labelStyles,
+                    }}
+                    style={textFieldStyles}
+                    onChange={handleInputChange}
+                  />
 
-                <TextField
-                  id="homeImprovement"
-                  label="Home Improvement"
-                  variant="outlined"
-                  size="small"
-                  placeholder="0"
-                  value={40}
-                  type="number"
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
-                    inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                  }}
-                  InputLabelProps={{
-                    style: labelStyles,
-                  }}
-                  style={textFieldStyles}
-                  onChange={handleInputChange}
-                />
+                  <TextField
+                    id="homeImprovement"
+                    label="Home Improvement"
+                    variant="outlined"
+                    size="small"
+                    placeholder="0"
+                    value={40}
+                    type="number"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">$</InputAdornment>
+                      ),
+                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
+                    }}
+                    InputLabelProps={{
+                      style: labelStyles,
+                    }}
+                    style={textFieldStyles}
+                    onChange={handleInputChange}
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className={styles.submitButtonContainer}>
-              <button className={styles.submitButton} type="submit">
-                Calculate
-              </button>
-            </div>
-          </form>
+              <div className={styles.submitButtonContainer}>
+                <button className={styles.submitButton} type="submit">
+                  Calculate
+                </button>
+              </div>
+            </form>
 
-          <table>
-            <tbody>
-              <tr>
-                <td>Yearly Cash Back: ${totalValue1.toFixed(2)}</td>
-                <td>Yearly Cash Back: ${totalValue2.toFixed(2)}</td>
-                <td>Yearly Cash Back: ${totalValue3.toFixed(2)}</td>
-              </tr>
-            </tbody>
-          </table>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Aprox. Yearly Cash Back: ${totalValue1.toFixed(2)}</td>
+                  <td>Aprox. Yearly Cash Back: ${totalValue2.toFixed(2)}</td>
+                  <td>Aprox. Yearly Cash Back: ${totalValue3.toFixed(2)}</td>
+                </tr>
+              </tbody>
+            </table>
 
-          <h2>Credit Card</h2>
+            <h2>Credit Card</h2>
 
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                <td className={styles.selectionRow}>
-                  <CreditCardSelectBox
-                    value={selectedCreditCards[0]}
-                    onChange={ccNameChange}
-                    name="select1"
-                  />
-                  <CreditCardSelectBox
-                    value={selectedCreditCards[1]}
-                    onChange={ccNameChange}
-                    name="select2"
-                  />
-                  <CreditCardSelectBox
-                    value={selectedCreditCards[2]}
-                    onChange={ccNameChange}
-                    name="select3"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                {imageURLs.map((URL, index) => (
-                  <td
-                    className={`${styles.column} ${
-                      index === 1 ? styles.borderTd : ""
-                    }`}
-                    key={index}
-                  >
-                    <img src={URL + ".png"} />
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  <td className={styles.selectionRow}>
+                    <CreditCardSelectBox
+                      value={selectedCreditCards[0]}
+                      onChange={ccNameChange}
+                      name="select1"
+                    />
+                    <CreditCardSelectBox
+                      value={selectedCreditCards[1]}
+                      onChange={ccNameChange}
+                      name="select2"
+                    />
+                    <CreditCardSelectBox
+                      value={selectedCreditCards[2]}
+                      onChange={ccNameChange}
+                      name="select3"
+                    />
                   </td>
-                ))}
-              </tr>
-              <tr>
-                {cardNames.map((name, index) => (
-                  <td
-                    className={`${styles.column} ${
-                      index === 1 ? styles.borderTd : ""
-                    }`}
-                    key={index}
-                  >
-                    <div className={styles.cellContent}>{name}</div>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+                </tr>
+              </tbody>
+            </table>
 
-          <h2>Annual Fee</h2>
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  {imageURLs.map((URL, index) => (
+                    <td
+                      className={`${styles.column} ${
+                        index === 1 ? styles.borderTd : ""
+                      }`}
+                      key={index}
+                    >
+                      <img src={URL + ".png"} />
+                    </td>
+                  ))}
+                </tr>
+                <tr>
+                  {cardNames.map((name, index) => (
+                    <td
+                      className={`${styles.column} ${
+                        index === 1 ? styles.borderTd : ""
+                      }`}
+                      key={index}
+                    >
+                      <div className={styles.cellContent}>
+                        <strong>{name}</strong>
+                      </div>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
 
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                {annualFees.map((fee, index) => (
-                  <td
-                    className={`${styles.column} ${
-                      index === 1 ? styles.borderTd : ""
-                    }`}
-                    key={index}
-                  >
-                    <div className={styles.cellContent}>{fee}</div>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+            <h2>Annual Fee</h2>
 
-          <h2>Bonus Offer</h2>
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  {annualFees.map((fee, index) => (
+                    <td
+                      className={`${styles.column} ${
+                        index === 1 ? styles.borderTd : ""
+                      }`}
+                      key={index}
+                    >
+                      <div className={styles.cellContent}>{fee}</div>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
 
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                {bonusOffers.map((fee, index) => (
-                  <td
-                    className={`${styles.column} ${
-                      index === 1 ? styles.borderTd : ""
-                    }`}
-                    key={index}
-                  >
-                    <div className={styles.cellContent}>{fee}</div>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+            <h2>Bonus Offer</h2>
 
-          <h2>Cash Back</h2>
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  {bonusOffers.map((fee, index) => (
+                    <td
+                      className={`${styles.column} ${
+                        index === 1 ? styles.borderTd : ""
+                      }`}
+                      key={index}
+                    >
+                      <div className={styles.cellContent}>{fee}</div>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
 
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                {cashBack.map((cashback, index) => (
-                  <td
-                    className={`${styles.column} ${
-                      index === 1 ? styles.borderTd : ""
-                    }`}
-                    key={index}
-                  >
-                    <div className={styles.cellContent}>{cashback}</div>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+            <h2>Cash Back</h2>
 
-          <h2>Pros</h2>
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  {cashBack.map((cashback, index) => (
+                    <td
+                      className={`${styles.column} ${
+                        index === 1 ? styles.borderTd : ""
+                      }`}
+                      key={index}
+                    >
+                      <div className={styles.cellContent}>{cashback}</div>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
 
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                {pros.map((pros, index) => (
-                  <td
-                    className={`${styles.column} ${
-                      index === 1 ? styles.borderTd : ""
-                    }`}
-                    key={index}
-                  >
-                    <div className={styles.cellContent}>{pros}</div>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+            <h2>Pros</h2>
 
-          <h2>Additional Info</h2>
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  {pros.map((pros, index) => (
+                    <td
+                      className={`${styles.column} ${
+                        index === 1 ? styles.borderTd : ""
+                      }`}
+                      key={index}
+                    >
+                      <div className={styles.cellContent}>
+                        <ul>
+                          {pros.map((pro, proIndex) => (
+                            <li className={styles.bulletPoint} key={proIndex}>
+                              {pro}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
 
-          <table className={styles.table}>
-            <tbody>
-              <tr>
-                {more.map((moreInfo, index) => (
-                  <td
-                    className={`${styles.column} ${
-                      index === 1 ? styles.borderTd : ""
-                    }`}
-                    key={index}
-                  >
-                    <div className={styles.cellContent}>{moreInfo}</div>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
+            <h2>Cons</h2>
+
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  {cons.map((cons, index) => (
+                    <td
+                      className={`${styles.column} ${
+                        index === 1 ? styles.borderTd : ""
+                      }`}
+                      key={index}
+                    >
+                      <div className={styles.cellContent}>
+                        <ul>
+                          {cons.map((con, conIndex) => (
+                            <li className={styles.bulletPoint} key={conIndex}>
+                              {con}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+
+            <h2>Additional Info</h2>
+
+            <table className={styles.table}>
+              <tbody>
+                <tr>
+                  {more.map((moreInfo, index) => (
+                    <td
+                      className={`${styles.column} ${
+                        index === 1 ? styles.borderTd : ""
+                      }`}
+                      key={index}
+                    >
+                      <div className={styles.cellContent}>{moreInfo}</div>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </>

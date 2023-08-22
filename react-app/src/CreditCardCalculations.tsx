@@ -23,35 +23,57 @@ const cardCalculations: Record<string, (data: SpendingData) => number> = {
         return category;
       }
       return highest;
-    }, "groceries");
+    }, "gas");
 
     // Calculate and add the percentages based on categories
     categories.forEach((category) => {
       if (category === highestCategory) {
         total += data[category as keyof SpendingData] * 0.03 * 12; // 3% for highest category
       } else if (category === "groceries") {
-        total += data[category as keyof SpendingData] * 0.02 * 12; // 2% for groceries
+        const quarterlyGroceries = Math.min(data.groceries, 833); // Cap groceries at 625 per quarter
+        const remainderGroceries = Math.max(data.groceries - 833, 0);
+        total += (quarterlyGroceries * 0.02 + remainderGroceries * 0.01) * 12; // 2% capped, then 1%
       } else {
         total += data[category as keyof SpendingData] * 0.01 * 12; // 1% for other categories
       }
     });
-    console.log("this is the total: " + total);
     return total;
   },
   "Wells Fargo Active Cash": (data) => {
     let total = 0;
     const categories = Object.keys(data);
     categories.forEach((category) => {
-      total += data[category as keyof SpendingData] * 0.02 * 12; // 2% on all categories
+      total += data[category as keyof SpendingData] * 0.02 * 12; // 2% on all categories x 12 months
     });
-    return total; // Your calculated result
+    return total;
   },
   "American Express Blue Cash Preferred": (data) => {
-    // Perform calculations for this card using the shared data
-    return 3; // Your calculated result
+    let total = 0;
+    const categories = Object.keys(data);
+    categories.forEach((category) => {
+      if (category === "groceries") {
+        if (data[category as keyof SpendingData] <= 500) {
+          total += data[category as keyof SpendingData] * 0.06 * 12;
+        } else {
+          total +=
+            500 * 0.06 * 12 +
+            (data[category as keyof SpendingData] - 500) * 0.01 * 12; // 6% for the first $500, 1% for the remaining amount
+        }
+      } else if (category === "gas") {
+        total += data[category as keyof SpendingData] * 0.03 * 12; // 3% for gas
+      } else {
+        total += data[category as keyof SpendingData] * 0.01 * 12; // 1% for other categories
+      }
+    });
+    return total;
   },
   "Bank of America Unlimited Cash Rewards": (data) => {
-    return 4;
+    let total = 0;
+    const categories = Object.keys(data);
+    categories.forEach((category) => {
+      total += data[category as keyof SpendingData] * 0.015 * 12; // 1.5% on all categories x 12 months
+    });
+    return total;
   },
 };
 

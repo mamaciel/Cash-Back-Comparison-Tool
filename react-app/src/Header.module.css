@@ -18,23 +18,26 @@
 }
 
 h1 {
-  font-family: "Segoe UI";
+  font-family: "Arial";
   margin: 0;
 }
 
 h3 {
-  font-family: "Lato";
+  font-family: "Arial";
   margin: 0;
   margin-right: 10px; /* Add margin between h3 and logo */
 }
 
 .logo {
-  width: 35px; /* Adjust the width as needed */
+  width: 2rem; /* Adjust the width as needed */
   height: auto; /* Maintain aspect ratio */
 }
 
 @media (max-width: 500px) {
   h1 {
-    font-size: 27px;
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1rem;
   }
 }
