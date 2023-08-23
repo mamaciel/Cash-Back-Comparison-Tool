@@ -1,16 +1,3 @@
-/* Apply column layout using flexbox */
-/* .cellContent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-} */
-
-.column {
-  flex-basis: 33%; /* Each column occupies 33% of the width */
-  padding: 0 10px;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -22,16 +9,11 @@ table {
 
 td {
   font-family: Lato;
-  padding: 15px;
+  padding: 1rem;
   overflow: auto;
   font-size: 1.1rem;
   text-align: center;
   width: 33%;
-}
-
-.borderTd {
-  border-left: 1px solid #bebebe;
-  border-right: 1px solid #bebebe;
 }
 
 img {
@@ -44,17 +26,26 @@ p {
   padding-left: 1rem;
 }
 
+.column {
+  flex-basis: 33%; /* Each column occupies 33% of the width */
+  padding: 0 0.5rem;
+}
+
+.borderTd {
+  border-left: 1px solid #bebebe;
+  border-right: 1px solid #bebebe;
+}
+
 .tableContainer {
-  margin: 0 auto; /* Center align the table */
+  margin: 0 auto;
   width: 60%;
 }
 
 .spendingCategories {
   display: flex;
   align-items: center;
-  justify-content: space-evenly; /* Distribute items evenly along the main axis */
-  flex-wrap: wrap; /* Allow items to wrap to the next line */
-  gap: 2px;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .tableWrapper {
@@ -66,14 +57,14 @@ p {
   display: flex;
   justify-content: center;
   gap: 8.5%;
-  padding: 10px 0px;
+  padding: 1rem 0rem;
 }
 
 .submitButtonContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 1.5rem;
 }
 
 .submitButton {
@@ -81,16 +72,16 @@ p {
   color: white;
   border: none;
   background: green;
-  width: 140px;
-  height: 40px;
-  font-size: 20px;
-  border-radius: 20px;
+  width: 9rem;
+  height: 2.5rem;
+  font-size: 1.3rem;
+  border-radius: 2rem;
   cursor: pointer;
 }
 
 .submitButton:hover {
   background: rgb(0, 110, 0);
-  box-shadow: 5px 5px 5px #eee;
+  box-shadow: 0.5rem 0.5rem 0.5rem #eee;
 }
 
 .bulletPoint {
@@ -98,7 +89,7 @@ p {
 }
 
 .pageContainer {
-  padding-bottom: 20px;
+  padding-bottom: 1.3rem;
 }
 
 .cellContent ul {
@@ -107,7 +98,7 @@ p {
 
 .cellContent ul li {
   position: relative;
-  left: -10px;
+  left: -0.7rem;
   text-align: left;
 }
 
@@ -117,7 +108,7 @@ p {
   }
   td {
     font-size: 1rem;
-    padding: 5px;
+    padding: 1rem;
   }
 
   p {
