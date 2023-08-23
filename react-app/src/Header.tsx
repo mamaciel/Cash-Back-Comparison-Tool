@@ -1,4 +1,4 @@
-import HeaderCSS from "./Header.module.css";
+import HeaderCSS from "./styling/Header.module.css";
 import logoImage from "./assets/Marcos.png";
 
 const Header = () => {

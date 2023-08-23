@@ -151,6 +151,5 @@ export const Calculator = (
       results.push(result);
     }
   });
-  console.log("These are the results: " + results);
   return results;
 };

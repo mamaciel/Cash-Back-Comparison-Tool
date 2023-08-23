@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
 import styles from "./MainBody.module.css";
 import CreditCardData from "./CreditCardData";
-import CreditCardSelectBox from "./CreditCardSelects";
+import CreditCardSelectBox from "./Components/CreditCardSelects";
 import { InputAdornment, TextField, SelectChangeEvent } from "@mui/material";
 
 const textFieldStyles = {

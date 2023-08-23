@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { TextField, InputAdornment } from "@mui/material";
-import styles from "./MainBody.module.css";
+import styles from "../styling/MainBody.module.css";
 
 interface Category {
   id: string;

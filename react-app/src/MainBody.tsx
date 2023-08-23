@@ -1,10 +1,11 @@
 import React, { useState, ChangeEvent } from "react";
-import styles from "./MainBody.module.css";
+import styles from "./styling/MainBody.module.css";
 import CreditCardData from "./CreditCardData";
-import CreditCardSelectBox from "./CreditCardSelects";
-import { InputAdornment, TextField, SelectChangeEvent } from "@mui/material";
+import CreditCardSelectBox from "./Components/CreditCardSelects";
+import { SelectChangeEvent } from "@mui/material";
 import * as outsideFunctions from "./CreditCardCalculations";
-import SpendingCategoryFields from "./SpendingInputFields";
+import SpendingCategoryFields from "./Components/SpendingInputFields";
+import CardInfoTable from "./Components/CardInfoTable";
 
 const textFieldStyles = {
   width: "140px",
@@ -56,13 +57,13 @@ const MainBody = () => {
   const imageURLs = selectedCardData.map((card) => card.image);
 
   const [spendingInputs, setSpendingInputs] = useState({
-    groceries: 800.0,
-    gas: 100.0,
-    onlineShopping: 60.0,
-    dining: 300.0,
-    travel: 40.0,
-    drugStores: 20.0,
-    homeImprovement: 40.0,
+    groceries: 0.0,
+    gas: 0.0,
+    onlineShopping: 0.0,
+    dining: 0.0,
+    travel: 0.0,
+    drugStores: 0.0,
+    homeImprovement: 0.0,
   });
 
   // State variable to store the total value
@@ -205,62 +206,9 @@ const MainBody = () => {
               </tbody>
             </table>
 
-            <h2>Annual Fee</h2>
-
-            <table className={styles.table}>
-              <tbody>
-                <tr>
-                  {annualFees.map((fee, index) => (
-                    <td
-                      className={`${styles.column} ${
-                        index === 1 ? styles.borderTd : ""
-                      }`}
-                      key={index}
-                    >
-                      <div className={styles.cellContent}>{fee}</div>
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
-
-            <h2>Bonus Offer</h2>
-
-            <table className={styles.table}>
-              <tbody>
-                <tr>
-                  {bonusOffers.map((fee, index) => (
-                    <td
-                      className={`${styles.column} ${
-                        index === 1 ? styles.borderTd : ""
-                      }`}
-                      key={index}
-                    >
-                      <div className={styles.cellContent}>{fee}</div>
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
-
-            <h2>Cash Back</h2>
-
-            <table className={styles.table}>
-              <tbody>
-                <tr>
-                  {cashBack.map((cashback, index) => (
-                    <td
-                      className={`${styles.column} ${
-                        index === 1 ? styles.borderTd : ""
-                      }`}
-                      key={index}
-                    >
-                      <div className={styles.cellContent}>{cashback}</div>
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
+            <CardInfoTable title="Annual Fee" data={annualFees} />
+            <CardInfoTable title="Bonus Offer" data={bonusOffers} />
+            <CardInfoTable title="Cash Back" data={cashBack} />
 
             <h2>Pros</h2>
 
@@ -316,24 +264,7 @@ const MainBody = () => {
               </tbody>
             </table>
 
-            <h2>Additional Info</h2>
-
-            <table className={styles.table}>
-              <tbody>
-                <tr>
-                  {more.map((moreInfo, index) => (
-                    <td
-                      className={`${styles.column} ${
-                        index === 1 ? styles.borderTd : ""
-                      }`}
-                      key={index}
-                    >
-                      <div className={styles.cellContent}>{moreInfo}</div>
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-            </table>
+            <CardInfoTable title="Additional Info" data={more} />
           </div>
         </div>
       </div>
