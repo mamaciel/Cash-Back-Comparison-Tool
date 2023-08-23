@@ -43,6 +43,9 @@ const CreditCardSelectBox: React.FC<CreditCardSelectsProps> = ({
           <MenuItem value={"American Express Blue Cash Preferred"}>
             American Express Blue Cash Preferred
           </MenuItem>
+          <MenuItem value={"Capital One SavorOne"}>
+            Capital One SavorOne
+          </MenuItem>
         </Select>
       </FormControl>
     </Box>

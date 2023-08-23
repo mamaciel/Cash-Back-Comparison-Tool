@@ -75,6 +75,20 @@ const cardCalculations: Record<string, (data: SpendingData) => number> = {
     });
     return total;
   },
+  "Capital One SavorOne": (data) => {
+    let total = 0;
+    const categories = Object.keys(data);
+    categories.forEach((category) => {
+      if (category === "travel") {
+        total += data[category as keyof SpendingData] * 0.05 * 12; // 5% for travel
+      } else if (category === "groceries" || category === "dining") {
+        total += data[category as keyof SpendingData] * 0.03 * 12; // 3% for dining and groceries
+      } else {
+        total += data[category as keyof SpendingData] * 0.01 * 12; // 1% for other categories
+      }
+    });
+    return total;
+  },
 };
 
 export const Calculator = (

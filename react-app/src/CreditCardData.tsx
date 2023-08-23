@@ -55,6 +55,26 @@ const CreditCardData = [
       "$200 online cash rewards bonus after making at least $1,000 in purchases in the first 90 days of your account opening.",
     more: "Great option to use your credit card for every purchase and not worry about categories, but 1.5% unlimited cash back is low compared to other credit cards",
   },
+  {
+    name: "Capital One SavorOne",
+    image: "src/assets/Capital-One-SavorOne",
+    cashBack:
+      "Earn 10% cash back on purchases made through Uber & Uber Eats, 8% cash back on purchases made through the Capital One Entertainment ticketing platform, 5% cash back on hotels and rental cars booked through Capital One Travel using this Rewards card account, 3% on dining, entertainment, popular streaming services, and grocery stores, plus 1% on all other purchases",
+    annualFee: "$0",
+    pros: [
+      "No annual fee",
+      "Dining and groceries are usually high spending categories",
+      "5% cash back on travel purchases is very valuable to frequent travelers",
+      "No foreign transaction fees",
+      "Travel accident insurance included",
+      "Complimentary Uber One membership statement credits through 11/14/2024",
+      "No cap on spending categories",
+    ],
+    cons: ["Target and Walmart are excluded from 3% groceries cash back"],
+    bonusOffer:
+      "$200 cash rewards bonus after you make at least $500 in purchases in the first 90 days of account opening.",
+    more: "Very good card. Already beats cards that give 3% in only one category. Those with lots of streaming subscriptions also get rewarded. No foreign transactions fees and travel accident insurance are kind of rare with credit cards",
+  },
 ];
 
 export default CreditCardData;
