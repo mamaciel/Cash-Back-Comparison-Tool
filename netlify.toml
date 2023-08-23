@@ -5,3 +5,4 @@ status = 200
 
 [build]
 command = "npm run build"
+publish = "react-app\dist"
