@@ -4,6 +4,7 @@ import CreditCardData from "./CreditCardData";
 import CreditCardSelectBox from "./CreditCardSelects";
 import { InputAdornment, TextField, SelectChangeEvent } from "@mui/material";
 import * as outsideFunctions from "./CreditCardCalculations";
+import SpendingCategoryFields from "./SpendingInputFields";
 
 const textFieldStyles = {
   width: "140px",
@@ -71,8 +72,6 @@ const MainBody = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(spendingInputs);
-    console.log("The value of dining is:" + spendingInputs.dining);
     const results = outsideFunctions.Calculator(
       spendingInputs,
       selectedCreditCards
@@ -104,6 +103,16 @@ const MainBody = () => {
     });
   };
 
+  const categories = [
+    { id: "groceries", label: "Groceries" },
+    { id: "gas", label: "Gas" },
+    { id: "onlineShopping", label: "Online Shopping" },
+    { id: "dining", label: "Dining" },
+    { id: "travel", label: "Travel" },
+    { id: "drugStores", label: "Drug Stores" },
+    { id: "homeImprovement", label: "Home Improvement" },
+  ];
+
   return (
     <>
       <div className={styles.pageContainer}>
@@ -113,156 +122,14 @@ const MainBody = () => {
             <p>Please enter your monthly average spending for each category.</p>
 
             <form onSubmit={handleSubmit}>
-              <div className={styles.categoriesContainer}>
-                <div className={styles.spendingCategories}>
-                  <TextField
-                    id="groceries"
-                    label="Groceries"
-                    variant="outlined"
-                    size="small"
-                    placeholder="0"
-                    value={800}
-                    type="number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                    }}
-                    InputLabelProps={{
-                      style: labelStyles,
-                    }}
-                    style={textFieldStyles}
-                    onChange={handleInputChange}
-                  />
-
-                  <TextField
-                    id="gas"
-                    label="Gas"
-                    variant="outlined"
-                    size="small"
-                    placeholder="0"
-                    value={100}
-                    type="number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                    }}
-                    InputLabelProps={{
-                      style: labelStyles,
-                    }}
-                    style={textFieldStyles}
-                    onChange={handleInputChange}
-                  />
-
-                  <TextField
-                    id="onlineShopping"
-                    label="Online Shopping"
-                    variant="outlined"
-                    size="small"
-                    placeholder="0"
-                    value={60}
-                    type="number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                    }}
-                    InputLabelProps={{
-                      style: labelStyles,
-                    }}
-                    style={textFieldStyles}
-                    onChange={handleInputChange}
-                  />
-
-                  <TextField
-                    id="dining"
-                    label="Dining"
-                    variant="outlined"
-                    size="small"
-                    placeholder="0"
-                    value={300}
-                    type="number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                    }}
-                    InputLabelProps={{
-                      style: labelStyles,
-                    }}
-                    style={textFieldStyles}
-                    onChange={handleInputChange}
-                  />
-
-                  <TextField
-                    id="travel"
-                    label="Travel"
-                    variant="outlined"
-                    size="small"
-                    placeholder="0"
-                    value={40}
-                    type="number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                    }}
-                    InputLabelProps={{
-                      style: labelStyles,
-                    }}
-                    style={textFieldStyles}
-                    onChange={handleInputChange}
-                  />
-
-                  <TextField
-                    id="drugStores"
-                    label="Drug Stores"
-                    variant="outlined"
-                    size="small"
-                    placeholder="0"
-                    value={20}
-                    type="number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                    }}
-                    InputLabelProps={{
-                      style: labelStyles,
-                    }}
-                    style={textFieldStyles}
-                    onChange={handleInputChange}
-                  />
-
-                  <TextField
-                    id="homeImprovement"
-                    label="Home Improvement"
-                    variant="outlined"
-                    size="small"
-                    placeholder="0"
-                    value={40}
-                    type="number"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">$</InputAdornment>
-                      ),
-                      inputProps: { min: 0, step: "any" }, //Step "any" allows for float values in textfield
-                    }}
-                    InputLabelProps={{
-                      style: labelStyles,
-                    }}
-                    style={textFieldStyles}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
+              <SpendingCategoryFields
+                categories={categories}
+                values={spendingInputs}
+                onChange={handleInputChange}
+                inputProps={{ min: 0, step: "any" }}
+                labelStyles={labelStyles}
+                textFieldStyles={textFieldStyles}
+              />
 
               <div className={styles.submitButtonContainer}>
                 <button className={styles.submitButton} type="submit">

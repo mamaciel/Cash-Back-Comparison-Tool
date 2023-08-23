@@ -22,15 +22,8 @@ const CreditCardSelectBox: React.FC<CreditCardSelectsProps> = ({
   return (
     <Box sx={{ width: "25%" }}>
       <FormControl fullWidth>
-        <InputLabel id={`demo-simple-select-label-${name}`}>Name</InputLabel>
-        <Select
-          labelId={`demo-simple-select-label-${name}`}
-          id={`demo-simple-select-${name}`}
-          value={value}
-          label="Name"
-          onChange={onChange}
-          name={name}
-        >
+        <InputLabel>Name</InputLabel>
+        <Select value={value} label="Name" onChange={onChange} name={name}>
           <MenuItem value={"Bank of America Customized Cash Rewards"}>
             Bank of America Customized Cash Rewards
           </MenuItem>
