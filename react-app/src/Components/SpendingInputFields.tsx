@@ -9,7 +9,6 @@ interface Category {
 
 interface SpendingCategoryFieldsProps {
   categories: Category[];
-  values: { [key: string]: number };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   inputProps: { min: number; step: string };
   labelStyles: React.CSSProperties;
@@ -18,7 +17,6 @@ interface SpendingCategoryFieldsProps {
 
 const SpendingCategoryFields: React.FC<SpendingCategoryFieldsProps> = ({
   categories,
-  values,
   onChange,
   inputProps,
   labelStyles,
@@ -35,7 +33,6 @@ const SpendingCategoryFields: React.FC<SpendingCategoryFieldsProps> = ({
             variant="outlined"
             size="small"
             placeholder="0"
-            value={values[category.id]}
             type="number"
             InputProps={{
               startAdornment: (

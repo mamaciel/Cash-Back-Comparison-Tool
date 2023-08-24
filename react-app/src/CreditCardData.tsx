@@ -1,7 +1,7 @@
 const CreditCardData = [
   {
     name: "Bank of America Customized Cash Rewards",
-    image: "src/assets/Bank-of-America-Customized-Cash-Rewards",
+    image: "./images/Bank-of-America-Customized-Cash-Rewards.png",
     cashBack:
       "Earn 3% cash back in the category of your choice, 2% at grocery stores and wholesale clubs (up to $2,500 in combined choice category/grocery store/wholesale club quarterly purchases) and unlimited 1% on all other purchases",
     annualFee: "$0",
@@ -21,7 +21,7 @@ const CreditCardData = [
   },
   {
     name: "Bank of America Unlimited Cash Rewards",
-    image: "src/assets/Bank-of-America-Unlimited-Cash-Rewards",
+    image: "./images/Bank-of-America-Unlimited-Cash-Rewards.png",
     cashBack: "1.5% on all purchases",
     annualFee: "$0",
     pros: ["No annual fee", "Simple cash back"],
@@ -32,7 +32,7 @@ const CreditCardData = [
   },
   {
     name: "Wells Fargo Active Cash",
-    image: "src/assets/Wells-Fargo-Active-Cash",
+    image: "./images/Wells-Fargo-Active-Cash.png",
     cashBack: "2% back on all purchases",
     annualFee: "$0",
     pros: ["No annual fee", "Simple cash back"],
@@ -45,7 +45,7 @@ const CreditCardData = [
   },
   {
     name: "American Express Blue Cash Preferred",
-    image: "src/assets/American-Express-Blue-Cash-Preferred",
+    image: "./images/American-Express-Blue-Cash-Preferred.png",
     cashBack:
       "6% at U.S. supermarkets on up to $6,000 per year in purchases, 6% on select U.S. streaming subscriptions, 3% at U.S. gas stations and on transit, 1% on all other purchases.",
     annualFee: "$0 for the first year, then $95/year",
@@ -62,7 +62,7 @@ const CreditCardData = [
   },
   {
     name: "American Express Blue Cash Everyday",
-    image: "src/assets/American-Express-Blue-Cash-Everyday",
+    image: "./images/American-Express-Blue-Cash-Everyday.png",
     cashBack:
       "3% Cash Back at U.S. supermarkets (up to $6,000 per year in purchases, then 1%). 3% Cash Back on U.S. online retail purchases (up to $6,000 per year, then 1%). 3% Cash Back at U.S. gas stations (up to $6,000 per year, then 1%). 1% on all other purchases",
     annualFee: "$0",
@@ -79,7 +79,7 @@ const CreditCardData = [
   },
   {
     name: "Capital One SavorOne",
-    image: "src/assets/Capital-One-SavorOne",
+    image: "./images/Capital-One-SavorOne.png",
     cashBack:
       "Earn 10% cash back on purchases made through Uber & Uber Eats, 8% cash back on purchases made through the Capital One Entertainment ticketing platform, 5% cash back on hotels and rental cars booked through Capital One Travel using this Rewards card account, 3% on dining, entertainment, popular streaming services, and grocery stores, plus 1% on all other purchases",
     annualFee: "$0",
@@ -99,7 +99,7 @@ const CreditCardData = [
   },
   {
     name: "Chase Freedom Unlimited",
-    image: "src/assets/Chase-Freedom-Unlimited",
+    image: "./images/Chase-Freedom-Unlimited.png",
     cashBack:
       "5% on travel purchased through Chase Ultimate Rewards portal, 3% on dining at restaurants, including takeout and eligible delivery services, 3% on drugstore purchases, 1.5% on all purchases",
     annualFee: "$0",
@@ -118,7 +118,7 @@ const CreditCardData = [
   },
   {
     name: "Citi Double Cash",
-    image: "src/assets/Citi-Double-Cash",
+    image: "./images/Citi-Double-Cash.png",
     cashBack:
       "2% unlimited cash back on all purchases (1% cash back when you buy, 1% when you pay)",
     annualFee: "$0",

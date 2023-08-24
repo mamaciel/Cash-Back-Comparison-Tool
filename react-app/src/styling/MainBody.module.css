@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 table {
   width: 100%;
   border-collapse: collapse;
@@ -8,7 +9,7 @@ table {
 }
 
 td {
-  font-family: Lato;
+  font-family: "Poppins", "Lato";
   padding: 1rem;
   overflow: auto;
   font-size: 1.1rem;
@@ -22,8 +23,14 @@ img {
 }
 
 p {
-  font-family: Lato;
+  font-family: "Poppins", "Lato";
   padding-left: 1rem;
+}
+
+h2 {
+  font-family: "Poppins", "Lato";
+  padding-left: 1rem;
+  font-size: 1.3rem;
 }
 
 .column {
@@ -48,6 +55,14 @@ p {
   flex-wrap: wrap;
 }
 
+.disclaimer {
+  text-align: center;
+}
+
+.disclaimer i {
+  font-size: 0.9rem;
+}
+
 .tableWrapper {
   width: 100%;
 }
@@ -68,7 +83,7 @@ p {
 }
 
 .submitButton {
-  font-family: Lato;
+  font-family: "Poppins", "Lato";
   color: white;
   border: none;
   background: green;
@@ -100,6 +115,14 @@ p {
   position: relative;
   left: -0.7rem;
   text-align: left;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(243, 243, 243);
+  height: 6rem;
 }
 
 @media (max-width: 1000px) {

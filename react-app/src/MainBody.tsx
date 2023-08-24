@@ -84,9 +84,10 @@ const MainBody = () => {
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
+    const floatValue = value !== "" ? parseFloat(value) : 0;
     setSpendingInputs((prevSpendingInputs) => ({
       ...prevSpendingInputs,
-      [id]: parseFloat(value), // Convert input string to a number (float)
+      [id]: floatValue,
     }));
   };
 
@@ -125,7 +126,6 @@ const MainBody = () => {
             <form onSubmit={handleSubmit}>
               <SpendingCategoryFields
                 categories={categories}
-                values={spendingInputs}
                 onChange={handleInputChange}
                 inputProps={{ min: 0, step: "any" }}
                 labelStyles={labelStyles}
@@ -148,6 +148,16 @@ const MainBody = () => {
                 </tr>
               </tbody>
             </table>
+
+            <p className={styles.disclaimer}>
+              <i>
+                *Disclaimer: These cash back estimates are calculated using the
+                listed cash back rewards. For example, a 2% cash back card is
+                calculated by multiplying your monthly category spending * 0.02
+                * 12 months. These rewards may change, please refer to the
+                bank's official pages for the most accurate information!*
+              </i>
+            </p>
 
             <h2>Credit Card</h2>
 
@@ -185,7 +195,7 @@ const MainBody = () => {
                       }`}
                       key={index}
                     >
-                      <img src={URL + ".png"} />
+                      <img src={URL} />
                     </td>
                   ))}
                 </tr>
@@ -198,7 +208,9 @@ const MainBody = () => {
                       key={index}
                     >
                       <div className={styles.cellContent}>
-                        <strong>{name}</strong>
+                        <p>
+                          <strong>{name}</strong>
+                        </p>
                       </div>
                     </td>
                   ))}
@@ -265,6 +277,14 @@ const MainBody = () => {
             </table>
 
             <CardInfoTable title="Additional Info" data={more} />
+            <div className={styles.bottom}>
+              <p>
+                <strong>
+                  If you have any questions, concerns, or advice for improvement
+                  please email mamaciel2022@gmail.com
+                </strong>
+              </p>
+            </div>
           </div>
         </div>
       </div>
