@@ -208,9 +208,7 @@ const MainBody = () => {
                       key={index}
                     >
                       <div className={styles.cellContent}>
-                        <p>
-                          <strong>{name}</strong>
-                        </p>
+                        <strong>{name}</strong>
                       </div>
                     </td>
                   ))}
