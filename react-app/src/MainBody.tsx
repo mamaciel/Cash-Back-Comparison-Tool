@@ -153,8 +153,8 @@ const MainBody = () => {
               <i>
                 *Disclaimer: These cash back estimates are calculated using the
                 listed cash back rewards. For example, a 2% cash back card is
-                calculated by multiplying your monthly category spending * 0.02
-                * 12 months. These rewards may change, please refer to the
+                calculated by multiplying your monthly category spending x 0.02
+                x 12 months. These rewards may change, please refer to the
                 bank's official pages for the most accurate information!*
               </i>
             </p>
@@ -278,8 +278,8 @@ const MainBody = () => {
             <div className={styles.bottom}>
               <p>
                 <strong>
-                  If you have any questions, concerns, or advice for improvement
-                  please email mamaciel2022@gmail.com
+                  If you have any questions, concerns, or suggestions for
+                  improvement please email mamaciel2022@gmail.com
                 </strong>
               </p>
             </div>
